@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import PlayerList from './PlayerList';
+import PlayerForm from './PlayerForm';
 
 const Players = () => {
     const [players, setPlayers] = useState([])
+    const [adding, setAdd] = useState(false)
 
     useEffect( () => {
         axios.get('/api/players')
@@ -15,7 +17,7 @@ const Players = () => {
     }, [])
 
     const addPlayer = (player) => {
-        axios.post("/api/players", { players })
+        axios.post("/api/players", { player })
             .then ( res => {
                 setPlayers([ ...player, res.data])
             })
@@ -47,7 +49,9 @@ const Players = () => {
     return(
         <>
             <h1>All Players</h1>
-
+            <PlayerForm 
+                addPlayer={addPlayer}
+            />
             <PlayerList 
                 players={players}
                 updatePlayer={updatePlayer}

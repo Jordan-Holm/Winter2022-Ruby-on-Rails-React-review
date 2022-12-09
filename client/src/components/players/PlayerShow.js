@@ -2,6 +2,7 @@
 const PlayerShow = ({ id, username, age, console, online_status, deletePlayer, updatePlayer}) => (
     <>
         <h3>{username}</h3>
+        <button onClick={() => deletePlayer(id)}>x</button>
         <ul>
             <li>
                 Age: {age}
